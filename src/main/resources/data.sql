@@ -1,0 +1,1 @@
+INSERT INTO RESOURCE_TABLE VALUES (1,TRUE,FALSE,1,sysdate(),'Sandeep',sysdate(),'Mardolkar',TRUE);

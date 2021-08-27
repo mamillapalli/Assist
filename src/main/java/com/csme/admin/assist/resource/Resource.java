@@ -1,23 +1,32 @@
 package com.csme.admin.assist.resource;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity(name = "RESOURCE_TABLE")
+@Validated
 public class Resource {
 
     @Id
     @GeneratedValue
     private long resourceId;
+    @Size(min = 2 , message = "first name of the resource should be atleast 2 characters")
     @Column(name = "FIRST_NAME")
     private String firstName;
+    @Size(min = 2, message = "last name of the resource should be atleast 2 characters")
     @Column(name = "LAST_NAME")
     private String lastName;
+    @Past(message = "birth date of the resource can only be in the past")
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
+    @Past(message = "joining date of the resource can only be in the past")
     @Column(name = "JOINING_DATE")
     private Date joiningDate;
     @Column(name = "ACTIVE_STATUS")

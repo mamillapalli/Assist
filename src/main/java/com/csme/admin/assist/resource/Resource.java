@@ -44,7 +44,7 @@ public class Resource {
     @Column(name = "APPROVER_STATUS")
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "RESOURCE_ROLES_TABLE",
+            name = "RESOURCE_ROLES",
             joinColumns = { @JoinColumn(name = "RESOURCE_id") },
             inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }
     )

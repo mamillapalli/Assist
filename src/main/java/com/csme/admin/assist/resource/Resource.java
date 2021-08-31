@@ -1,17 +1,25 @@
 package com.csme.admin.assist.resource;
 
+import com.csme.admin.assist.role.Role;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "RESOURCE_TABLE")
 @Validated
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Resource {
 
     @Id
@@ -34,109 +42,16 @@ public class Resource {
     @Column(name = "APPROVER_ID")
     private long approverId;
     @Column(name = "APPROVER_STATUS")
-    private boolean approver;
-    @Column(name = "ADMIN_STATUS")
-    private boolean admin;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "RESOURCE_ROLES_TABLE",
+            joinColumns = { @JoinColumn(name = "RESOURCE_id") },
+            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") }
+    )
+    private List<Role> roles;
+    @Column(name = "EMAIL_ADDRESS")
+    @Email
+    private String emailAddress;
 
-    @Override
-    public String toString() {
-        return "Resource{" +
-                "resourceId=" + resourceId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", joiningDate=" + joiningDate +
-                ", status=" + status +
-                ", approverId=" + approverId +
-                ", approver=" + approver +
-                ", admin=" + admin +
-                '}';
-    }
 
-    public long getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(long resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Date getJoiningDate() {
-        return joiningDate;
-    }
-
-    public void setJoiningDate(Date joiningDate) {
-        this.joiningDate = joiningDate;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public long getApproverId() {
-        return approverId;
-    }
-
-    public void setApproverId(long approverId) {
-        this.approverId = approverId;
-    }
-
-    public boolean isApprover() {
-        return approver;
-    }
-
-    public void setApprover(boolean approver) {
-        this.approver = approver;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public Resource(long resourceId, String firstName, String lastName, Date birthDate, Date joiningDate, boolean status, long approverId, boolean approver, boolean admin) {
-        this.resourceId = resourceId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.joiningDate = joiningDate;
-        this.status = status;
-        this.approverId = approverId;
-        this.approver = approver;
-        this.admin = admin;
-    }
-
-    public Resource() {
-    }
 }

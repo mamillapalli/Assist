@@ -3,6 +3,7 @@ package com.csme.admin.assist.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ public class RoleController {
     RoleRepository roleRepository;
 
     //TO GET A LIST OF ROLES FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @GetMapping(path="/roles")
     public List<Role> getAllRoles()
     {
@@ -23,6 +25,7 @@ public class RoleController {
     }
 
     //TO GET A ROLE DETAILS FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @GetMapping(path="/roles/{id}")
     public Optional<Role> getAllRoles(@PathVariable @Valid int id) throws Exception {
         Optional<Role> role = roleRepository.findById(id);
@@ -32,15 +35,17 @@ public class RoleController {
     }
 
     //TO ADD A ROLE FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @PostMapping(path = "/roles")
     public Role saveRole(@Valid @RequestBody Role role)
     {
-        Role createdRole = roleRepository.save(role);
-        return createdRole;
+        return roleRepository.save(role);
+
     }
 
 
     // TO MODIFY A ROLE FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @PutMapping(path = "/roles/{id}")
     public ResponseEntity<Role> saveRole(@PathVariable(value = "id") Integer id, @Valid @RequestBody Role roleDetails) throws Exception {
         Role role = roleRepository.findById(id).orElseThrow(() -> new Exception("role wit id -> " + id + " not found"));

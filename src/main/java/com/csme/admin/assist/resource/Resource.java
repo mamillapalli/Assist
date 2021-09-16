@@ -42,7 +42,7 @@ public class Resource {
     @Column(name = "APPROVER_ID")
     private long approverId;
     @Column(name = "APPROVER_STATUS")
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @JoinTable(
             name = "RESOURCE_ROLES",
             joinColumns = { @JoinColumn(name = "RESOURCE_id") },

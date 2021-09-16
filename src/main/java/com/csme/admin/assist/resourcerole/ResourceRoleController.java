@@ -7,6 +7,7 @@ import com.csme.admin.assist.role.Role;
 import com.csme.admin.assist.role.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class ResourceRoleController {
 
 
     // TO GET A LIST OF RESOURCES AND THEIR ROLES FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @GetMapping(path="/resourceRoles", name="getAllResourceRoles")
     public List<ResourceRole> getAllResourceRoles()
     {
@@ -38,14 +40,16 @@ public class ResourceRoleController {
     }
 
     // TO GET A LIST OF ROLES FOR A GIVEN RESOURCE ID FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @GetMapping(path="/rolesForResource/{id}" ,name="getResourceRolesById")
     public List<ResourceRole> getResourceRolesById(@PathVariable int id)
     {
-        List<ResourceRole> resourceRoles = resourceRoleRepository.findByResourceId(id);
-        return resourceRoles;
+        return resourceRoleRepository.findByResourceId(id);
+
     }
 
     // TO GET A LIST OF RESOURCES WITH ROLE FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @GetMapping(path="/resourcesWithRole/{name}" ,name="getResourcesByRoleName")
     public  List<Optional<Resource>> getResourcesByRoleName(@PathVariable String name)
     {
@@ -62,11 +66,12 @@ public class ResourceRoleController {
     }
 
     // TO ASSIGN ROLES TO RESOURCE FOR ADMIN USERS
+    @Secured({"ADMIN","MANAGER"})
     @PostMapping(path="/assignRolesForResource/{id}" ,name="saveResourceRolesById")
     @Transactional
     public List<ResourceRole> saveResourceRolesById(@PathVariable int id, @RequestBody List<ResourceRole> resourceRoles)
     {
-        resourceRoles.stream().forEach((resourceRole) -> resourceRole.setResourceId(id));
+        resourceRoles.forEach((resourceRole) -> resourceRole.setResourceId(id));
         resourceRoleRepository.deleteByResourceId(id);
         return resourceRoleRepository.saveAll(resourceRoles);
 

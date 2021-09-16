@@ -38,7 +38,7 @@ public class AssistUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return resource.getFirstName();
+        return resource.getEmailAddress();
     }
 
     @Override

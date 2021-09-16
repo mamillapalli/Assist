@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-@Profile("JWT")
+@Profile("NOTUSED")
 public class SecurityUserDetailsService implements UserDetailsService {
 
     @Override

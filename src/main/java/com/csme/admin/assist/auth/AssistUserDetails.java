@@ -1,6 +1,6 @@
 package com.csme.admin.assist.auth;
 
-import com.csme.admin.assist.resource.Resource;
+import com.csme.admin.assist.entity.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

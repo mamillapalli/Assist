@@ -1,14 +1,16 @@
-package com.csme.admin.assist.role;
+package com.csme.admin.assist.entity;
 
-import com.csme.admin.assist.resource.Resource;
+import com.csme.admin.assist.entity.Resource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.UUID;
 
-@Entity(name = "ROLE_TABLE")
+@Entity
+@Table(name = "ROLE_TABLE", schema = "ADMIN")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,13 +18,9 @@ import java.util.List;
 public class Role {
 
     @Id
-    @GeneratedValue
     @Column (name="ROLE_ID")
-    private int id;
+    private UUID id;
     @Column (name="ROLE_NAME")
     @Size(min = 2 , message = "name of the role should be atleast 2 characters")
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-    private List<Resource> resources;
 }

@@ -1,10 +1,9 @@
 package com.csme.admin.assist.resourcerole;
 
 
-import com.csme.admin.assist.resource.Resource;
-import com.csme.admin.assist.resource.ResourceRepository;
-import com.csme.admin.assist.role.Role;
-import com.csme.admin.assist.role.RoleRepository;
+import com.csme.admin.assist.entity.Resource;
+import com.csme.admin.assist.repository.ResourceRepository;
+import com.csme.admin.assist.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,16 +51,17 @@ public class ResourceRoleController {
     @GetMapping(path="/resourcesWithRole/{name}" ,name="getResourcesByRoleName")
     public  List<Optional<Resource>> getResourcesByRoleName(@PathVariable String name)
     {
-        Role role = roleRepository.getByName(name);
+/*        Role role = roleRepository.getByName(name);
         List<ResourceRole> resourceRoles = resourceRoleRepository.findByRoleId(role.getId());
         List<Optional<Resource>> resources = new ArrayList<>();
         for (ResourceRole resourceRole:resourceRoles
              ) {
-            Optional<Resource> byId = resourceRepository.findById(Long.valueOf(String.valueOf(resourceRole.getResourceId())));
+            Optional<Resource> byId = resourceRepository.findById(resourceRole.getResourceId());
             if(byId.isPresent()) resources.add(byId);
 
         }
-        return resources;
+        return resources;*/
+        return null;
     }
 
     // TO ASSIGN ROLES TO RESOURCE FOR ADMIN USERS
@@ -71,10 +70,10 @@ public class ResourceRoleController {
     @Transactional
     public List<ResourceRole> saveResourceRolesById(@PathVariable int id, @RequestBody List<ResourceRole> resourceRoles)
     {
-        resourceRoles.forEach((resourceRole) -> resourceRole.setResourceId(id));
+/*        resourceRoles.forEach((resourceRole) -> resourceRole.setResourceId(id));
         resourceRoleRepository.deleteByResourceId(id);
-        return resourceRoleRepository.saveAll(resourceRoles);
-
+        return resourceRoleRepository.saveAll(resourceRoles);*/
+        return null;
     }
 
 }

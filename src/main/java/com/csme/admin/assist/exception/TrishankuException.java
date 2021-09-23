@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AssistExceptionResponse {
+public class TrishankuException {
 
     private Date timeStamp;
     private String errorMessage;

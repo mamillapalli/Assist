@@ -1,6 +1,5 @@
 package com.csme.admin.assist.resourcerole;
 
-import com.csme.admin.assist.resource.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,17 +1,20 @@
 package com.csme.admin.assist.jwtauthentication.configuration.service;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Profile("JWT")
@@ -41,5 +44,36 @@ public class RSAUtil {
         RSAPublicKeySpec spec = new RSAPublicKeySpec(new BigInteger(publicKeyModulus), new BigInteger(publicKeyExponent));
         KeyFactory factory = KeyFactory.getInstance("RSA");
         return factory.generatePublic(spec);
+    }
+
+    public static Map<String, BigInteger> generateNewRSAKeys()
+    {
+        KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS512);
+        PrivateKey privateKey = keyPair.getPrivate();
+        PublicKey publicKey = keyPair.getPublic();
+        HashMap<String, BigInteger> hashMap = new HashMap<String, BigInteger>();
+        hashMap.put("privateKey.exponent",((RSAPrivateKey)privateKey).getPrivateExponent());
+        hashMap.put("privateKey.modulus",((RSAPrivateKey)privateKey).getModulus());
+        hashMap.put("publicKey.exponent",((RSAPublicKey)publicKey).getPublicExponent());
+        hashMap.put("publicKey.exponent",((RSAPublicKey)publicKey).getModulus());
+
+
+        return hashMap;
+    }
+
+    public static void main (String[] args)
+    {
+        KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS512);
+        PrivateKey privateKey = keyPair.getPrivate();
+        PublicKey publicKey = keyPair.getPublic();
+
+
+        // Below lines to print the key details
+        System.out.println("privateKey.exponent="+((RSAPrivateKey)privateKey).getPrivateExponent());
+        System.out.println("privateKey.modulus="+((RSAPrivateKey)privateKey).getModulus());
+        System.out.println("publicKey.exponent="+((RSAPublicKey)publicKey).getPublicExponent());
+        System.out.println("publicKey.exponent="+((RSAPublicKey)publicKey).getModulus());
+
+
     }
 }

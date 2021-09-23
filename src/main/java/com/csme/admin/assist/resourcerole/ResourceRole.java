@@ -1,17 +1,14 @@
 package com.csme.admin.assist.resourcerole;
 
-import com.csme.admin.assist.resource.Resource;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.UUID;
 
-@Entity(name = "resource_roles")
+@Entity(name = "RESOURCE_ROLES_TABLE")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,11 +16,10 @@ import java.util.List;
 public class ResourceRole {
 
     @Id
-    @GeneratedValue
-    @Column (name="resource_roles_id")
-    private int id;
-    @Column(name="resource_id")
-    private int resourceId;
-    @Column(name="role_id")
-    private int roleId;
+    @Column (name="SYSTEM_ID")
+    private UUID uuid;
+    @Column(name="RESROUCE_ID")
+    private UUID resourceId;
+    @Column(name="ROLE_ID")
+    private UUID roleId;
 }

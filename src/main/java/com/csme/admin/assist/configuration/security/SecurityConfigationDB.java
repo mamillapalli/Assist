@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@Profile("DBAuthentication")
+@Profile("Dev")
 public class SecurityConfigationDB extends WebSecurityConfigurerAdapter {
 
     private static final String ROLE_PREFIX = "";
@@ -28,8 +28,8 @@ public class SecurityConfigationDB extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         //allows all requests without authentication
-      // httpSecurity.authorizeRequests().anyRequest().permitAll();
-        httpSecurity.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
+       httpSecurity.cors().and().csrf().disable().authorizeRequests().anyRequest().permitAll();
+      //  httpSecurity.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
 
         //all requests to be authenticated
        // httpSecurity.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated().and().sessionManagement()

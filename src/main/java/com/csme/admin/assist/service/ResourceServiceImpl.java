@@ -37,6 +37,8 @@ public class ResourceServiceImpl implements ResourceService {
             throw new ResourceNotFoundException("Resource with email " + resourceDTO.getEmailAddress() + " already exists");
         Resource resource = resourceMapper.ResourceDTOToResource(resourceDTO);
         resource.setUuid(UUID.randomUUID());
+        //TO RETRIEVE USER NAME FROM JWT
+        resource.setCreationDetails("RAVIKANTH");
         return resourceMapper.ResourceToResourceDTO(resourceRepository.save(resource));
     }
 
@@ -46,7 +48,8 @@ public class ResourceServiceImpl implements ResourceService {
         Resource resource = resourceRepository.findByEmailAddress(resourceDetails.getEmailAddress()).orElseThrow(() ->
                 new ResourceNotFoundException("Resource with email  -> " + resourceDetails.getEmailAddress() + " not found"));
         BeanUtils.copyProperties(resourceDetails,resource);
-
+        // TO RETRIEVE USER NAME FROM JWT
+        resource.setModificationDetails("RAVIKANTH");
         return resourceMapper.ResourceToResourceDTO(resourceRepository.save(resource));
     }
 }

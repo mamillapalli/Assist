@@ -1,9 +1,6 @@
 package com.csme.admin.assist.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -18,7 +15,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Resource {
+@ToString
+public class Resource extends Base{
 
     @Id
     private UUID uuid;

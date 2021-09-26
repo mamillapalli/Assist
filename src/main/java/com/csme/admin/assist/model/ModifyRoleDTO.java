@@ -10,9 +10,9 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDTO {
+public class ModifyRoleDTO {
 
     @Size(min = 2)
     private String name;
-
+    private String oldName;
 }

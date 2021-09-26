@@ -1,18 +1,16 @@
 package com.csme.admin.assist.controller;
 
 
-import com.csme.admin.assist.entity.Role;
+import com.csme.admin.assist.model.ModifyRoleDTO;
 import com.csme.admin.assist.model.RoleDTO;
-import com.csme.admin.assist.repository.RoleRepository;
 import com.csme.admin.assist.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/roles")
@@ -24,9 +22,9 @@ public class RoleController {
     //TO GET A LIST OF ROLES FOR ADMIN USERS
     //@Secured({"ADMIN","MANAGER"})
     @GetMapping()
-    public List<RoleDTO> getAllRoles()
+    public ResponseEntity<List<RoleDTO>> getAllRoles()
     {
-        return roleService.getAll();
+        return new ResponseEntity<>(roleService.getAll(),HttpStatus.OK);
     }
 
 /*
@@ -42,24 +40,20 @@ public class RoleController {
 
     //TO ADD A ROLE FOR ADMIN USERS
     //@Secured({"ADMIN","MANAGER"})
-    @PostMapping(path = "/roles")
-    public Role saveRole(@Valid @RequestBody Role role)
+    @PostMapping()
+    public ResponseEntity<RoleDTO> addRole(@Valid @RequestBody RoleDTO roleDTO)
     {
-        //return roleService.save(role);
-        return null;
+        return new ResponseEntity<>(roleService.add(roleDTO),HttpStatus.ACCEPTED);
+
 
     }
 
 
     // TO MODIFY A ROLE FOR ADMIN USERS
     //@Secured({"ADMIN","MANAGER"})
-    @PutMapping(path = "/roles/{id}")
-    public ResponseEntity<Role> saveRole(@PathVariable(value = "id") Integer id, @Valid @RequestBody Role roleDetails) throws Exception {
-/*        Role role = roleService.findById(id).orElseThrow(() -> new Exception("role wit id -> " + id + " not found"));
-        role.setName(roleDetails.getName());
-        final Role updatedRole = roleService.save(role);
-        return ResponseEntity.ok(updatedRole);*/
-        return null;
+    @PutMapping()
+    public ResponseEntity<RoleDTO> updateRole(@Valid @RequestBody ModifyRoleDTO roleDetails)  {
+        return new ResponseEntity<>(roleService.update(roleDetails), HttpStatus.ACCEPTED);
     }
 
 }

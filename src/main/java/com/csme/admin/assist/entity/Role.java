@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Role {
+public class Role extends Base{
 
     @Id
     @Column (name="ROLE_ID")

@@ -39,6 +39,8 @@ public class Resource extends Base{
     private List<Role> roles;
     @Column(name = "EMAIL_ADDRESS", unique = true)
     private String emailAddress;
+    @Column(name = "REPORTING_TO")
+    private String reportingTo;
 
 
 }

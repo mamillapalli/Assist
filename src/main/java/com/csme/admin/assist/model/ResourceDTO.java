@@ -28,4 +28,6 @@ public class ResourceDTO {
     @Email
     @NotEmpty
     private String emailAddress;
+
+    private String reportingTo;
 }

@@ -146,6 +146,22 @@
             <version>${org.mapstruct.version}</version>
         </dependency>
 
+        <!-- for embedded ldap to be removed once testing is done -->
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+        </dependency>
+
+        <!-- dependencies to connect to LDAP -->
+        <dependency>
+            <groupId>org.springframework.ldap</groupId>
+            <artifactId>spring-ldap-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

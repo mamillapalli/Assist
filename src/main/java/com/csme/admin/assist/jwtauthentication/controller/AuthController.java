@@ -42,10 +42,13 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(authenticationRequestDetails.getEmailAddress(), authenticationRequestDetails.getPassword())
             );
         }
-        catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
+        catch (BadCredentialsException be) {
+            throw new Exception("Incorrect username or password", be);
         }
-
+        catch(Exception e) {
+            if(e.getMessage().contains("AuthenticationException"))  throw new Exception("Incorrect username or password", e);
+            System.out.println("exception message is " + e.getMessage());
+        }
 
         final UserDetails userDetails = securityUserDetailsService
                 .loadUserByUsername(authenticationRequestDetails.getEmailAddress());

@@ -4,6 +4,7 @@ package com.csme.admin.assist.jwtauthentication.filter;
 import com.csme.admin.assist.jwtauthentication.configuration.service.JWTUtil;
 import com.csme.admin.assist.jwtauthentication.configuration.service.RSAUtil;
 import com.csme.admin.assist.jwtauthentication.configuration.service.SecurityUserDetailsService;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Enumeration;
 
 @Component
 @Profile("JWT")
@@ -39,7 +41,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        final String authorizationHeader = request.getHeader("Authorization");
+
+        Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            String value = request.getHeader(key);
+            System.out.println("Header " + key + " has value " + value);
+        }
+
+
+        final String authorizationHeader = request.getHeader("authorization");
+        System.out.println("authorizationHeader is " + authorizationHeader);
 
         String username = null;
         String jwt = null;

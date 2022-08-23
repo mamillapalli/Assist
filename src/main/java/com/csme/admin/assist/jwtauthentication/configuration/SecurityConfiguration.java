@@ -16,7 +16,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+import java.util.List;
 
 @EnableWebSecurity
 @Profile("JWT")
@@ -33,6 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${ldap.managerPassword}")
     private String ldapManagerPassword;
 
+    @Value("${cors.allowedURLS}")
+    private String corsAllowedUrls;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
       //  auth.userDetailsService(myUserDetailsService);
@@ -48,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         System.out.println("ldap url is " + ldapUrl);
         System.out.println("ldap manager Dn is " + ldapManagerDn);
         System.out.println("ldap manager password is " + ldapManagerPassword);
+        System.out.println("corsAllowedUrls is " + corsAllowedUrls);
 
             auth.ldapAuthentication()
 
@@ -74,6 +85,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        //System.out.println("cors urls are " + String.valueOf(Arrays.asList(corsAllowedUrls.split(";"))));
+        System.out.println("corsAllowedUrls corsConfigurer is " + corsAllowedUrls);
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+               //registry.addMapping("/**").allowedOrigins(String.valueOf(Arrays.asList(corsAllowedUrls.split(";")))).allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");
+            }
+        };
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedOrigins(Arrays.asList(corsAllowedUrls.split(";")));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
+        configuration.setAllowCredentials(true);
+        configuration.setExposedHeaders(List.of("jwt"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Override

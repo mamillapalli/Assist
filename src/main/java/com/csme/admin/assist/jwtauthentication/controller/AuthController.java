@@ -5,6 +5,8 @@ import com.csme.admin.assist.jwtauthentication.configuration.model.Authenticatio
 import com.csme.admin.assist.jwtauthentication.configuration.service.JWTUtil;
 import com.csme.admin.assist.jwtauthentication.configuration.service.RSAUtil;
 import com.csme.admin.assist.jwtauthentication.configuration.service.SecurityUserDetailsService;
+import com.csme.admin.assist.model.ResourceDTO;
+import com.csme.admin.assist.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 @Profile("JWT")
@@ -34,6 +38,9 @@ public class AuthController {
 
     @Autowired
     UserDetailsService securityUserDetailsService;
+
+    @Autowired
+    ResourceService resourceService;
 
     @PostMapping(path = "/authenticate")
     public ResponseEntity<AuthenticationResponseDetails> authenticate(@RequestBody AuthenticationRequestDetails authenticationRequestDetails) throws Exception {
@@ -64,4 +71,12 @@ public class AuthController {
     {
         return "Hello World";
     }
+
+    @GetMapping (path = "/profile")
+    public Optional<ResourceDTO> getProfile()
+    {
+        Optional<ResourceDTO> resourceDTO = Optional.ofNullable(resourceService.getResourceByEmailAddress(jwtUtil.extractUsernameFromRequest()));
+        return resourceDTO;
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.csme.admin.assist.controller;
 
 
+import com.csme.admin.assist.jwtauthentication.configuration.service.JWTUtil;
 import com.csme.admin.assist.model.ResourceDTO;
 
 import com.csme.admin.assist.service.ResourceService;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 
@@ -19,7 +22,8 @@ import java.util.List;
 @RequestMapping("/api/v1/resources")
 public class ResourceController {
 
-
+    @Autowired
+    JWTUtil jwtUtil;
 
     @Autowired
     ResourceService resourceService;
@@ -77,5 +81,6 @@ public class ResourceController {
         return new ResponseEntity<>(resourceService.update(resourceDetails), HttpStatus.ACCEPTED);
 
     }
+
 
 }

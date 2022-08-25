@@ -37,9 +37,11 @@ public class ResourceServiceImpl implements ResourceService {
             throw new ResourceNotFoundException("Resource with email " + resourceDTO.getEmailAddress() + " already exists");
         Resource resource = resourceMapper.ResourceDTOToResource(resourceDTO);
         resource.setUuid(UUID.randomUUID());
+
         //TO RETRIEVE USER NAME FROM JWT
         resource.setCreationDetails("RAVIKANTH");
         return resourceMapper.ResourceToResourceDTO(resourceRepository.save(resource));
+        //return resourceDTO;
     }
 
     @Override

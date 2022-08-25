@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @Valid
 @Slf4j
-@RequestMapping("/api/v1/resourceroles")
+@RequestMapping("/resourceroles")
 public class ResourceRoleController {
 
 

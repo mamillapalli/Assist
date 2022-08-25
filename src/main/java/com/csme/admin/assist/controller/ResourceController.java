@@ -19,7 +19,7 @@ import java.util.Optional;
 @RestController
 
 @Slf4j
-@RequestMapping("/api/v1/resources")
+@RequestMapping("/resources")
 public class ResourceController {
 
     @Autowired
@@ -68,6 +68,7 @@ public class ResourceController {
    // @Secured({"ADMIN","MANAGER"})
     public ResourceDTO saveResource(@Valid  @RequestBody ResourceDTO resourceDTO)
     {
+
         return  resourceService.add(resourceDTO);
 
     }

@@ -3,6 +3,7 @@ package com.csme.admin.assist.jwtauthentication.configuration.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import java.util.function.Function;
 
 @Service
 @Profile("JWT")
+@Slf4j
 public class JWTUtil {
 
     @Autowired
@@ -50,14 +52,24 @@ public class JWTUtil {
     }
 
     public String generateToken(UserDetails userDetails, PrivateKey privateKey) {
+//        Map<String, Object> claims = new HashMap<>();
+//        return createToken(claims, userDetails.getUsername(),privateKey);
+
         Map<String, Object> claims = new HashMap<>();
+        StringBuffer userRoles= new StringBuffer();
+        userDetails.getAuthorities().stream().forEach(grantedAuthority -> {
+            log.info("authority of the user " + grantedAuthority.getAuthority());
+            userRoles.append(grantedAuthority.getAuthority()).append(",");
+        });
+        if(userRoles.length()>0) userRoles.deleteCharAt(userRoles.length()-1);
+        claims.put("roles",userRoles);
         return createToken(claims, userDetails.getUsername(),privateKey);
     }
 
     private String createToken(Map<String, Object> claims, String subject, PrivateKey privateKey) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100*100))
                 .signWith(SignatureAlgorithm.RS512, privateKey).compact();
     }
 

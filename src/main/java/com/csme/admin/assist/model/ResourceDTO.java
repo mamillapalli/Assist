@@ -1,5 +1,6 @@
 package com.csme.admin.assist.model;
 
+import com.csme.admin.assist.entity.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,6 +33,6 @@ public class ResourceDTO {
     @Email
     @NotEmpty
     private String emailAddress;
-
+    private List<RoleDTO> roles;
     private String reportingTo;
 }

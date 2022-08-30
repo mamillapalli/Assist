@@ -14,5 +14,6 @@ public class RoleDTO {
 
     @Size(min = 2)
     private String name;
+    private String roleDesc;
 
 }

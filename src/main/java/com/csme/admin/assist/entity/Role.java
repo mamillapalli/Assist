@@ -23,4 +23,7 @@ public class Role extends Base{
     @Column (name="ROLE_NAME")
     @Size(min = 2 , message = "name of the role should be atleast 2 characters")
     private String name;
+    @Column (name="ROLE_DESC")
+    private String roleDesc;
+
 }

@@ -1,5 +1,6 @@
 package com.csme.admin.assist.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -21,8 +22,10 @@ public class ResourceDTO {
     @Size(min = 2)
     private String lastName;
     @Past
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Dubai")
     private Date birthDate;
     @Past
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Dubai")
     private Date joiningDate;
     private boolean status;
     @Email

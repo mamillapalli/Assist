@@ -9,5 +9,6 @@ INSERT INTO admin.resource_table (uuid, birth_date, email_address, first_name, j
 
 INSERT INTO admin.resource_table (uuid, birth_date, email_address, first_name, joining_date, last_name, active_status) VALUES ('5c0c4396-cd95-4b64-adc2-4048f9e4c668', '1980-09-23 10:41:14.000000', 'sreenivas@chinasystems-me.com', 'Sreenivas', '2005-09-23 10:41:31.000000', 'Reddy', true);
 
-INSERT INTO admin.role_table (role_id, role_name) VALUES ('ce935232-4f78-4581-ab6b-80405e87c6d6', 'LEAVE_ADMIN');
-INSERT INTO admin.role_table (role_id, role_name) VALUES ('16186d8b-e7d3-475e-9533-bd317a8144dc', 'LEAVE_APPROVER');
+
+INSERT INTO admin.role_table (role_id, role_name,role_desc) VALUES ('ce935232-4f78-4581-ab6b-80405e87c6d6', 'LEAVE_ADMIN','Leave Administrator');
+INSERT INTO admin.role_table (role_id, role_name,role_desc) VALUES ('16186d8b-e7d3-475e-9533-bd317a8144dc', 'ADMIN','Organization Administrator');

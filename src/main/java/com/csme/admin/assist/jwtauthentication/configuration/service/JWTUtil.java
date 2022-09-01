@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,13 @@ public class JWTUtil {
 
     @Autowired
     RSAUtil rsaUtil;
+
+    private final String jwtExpiryInMinutues;
+
+    public JWTUtil(@Value("${jwt.expiry.inMinutes}")  String jwtExpiryInMinutues) {
+        this.jwtExpiryInMinutues = jwtExpiryInMinutues;
+
+    }
 
 
 
@@ -68,8 +76,12 @@ public class JWTUtil {
 
     private String createToken(Map<String, Object> claims, String subject, PrivateKey privateKey) {
 
+        log.info("JWT expiry configured in minutes is " + jwtExpiryInMinutues);
+        log.info("JWT iat time " + new Date(System.currentTimeMillis()));
+        log.info("JWT expiry time " + new Date(System.currentTimeMillis() + 1000 * 60 *  Integer.valueOf(jwtExpiryInMinutues)));
+
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 100*100))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *  Integer.valueOf(jwtExpiryInMinutues)))
                 .signWith(SignatureAlgorithm.RS512, privateKey).compact();
     }
 
@@ -94,5 +106,11 @@ public class JWTUtil {
         }
         return "";
     }
+
+//    public static void main(String a[])
+//    {
+//        System.out.println("issued at " + new Date(System.currentTimeMillis()));
+//        System.out.println("expiry at " + new Date(System.currentTimeMillis()+ 1000 * 60 * 60 ));
+//    }
 
 }

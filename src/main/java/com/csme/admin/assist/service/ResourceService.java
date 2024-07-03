@@ -13,4 +13,6 @@ public interface ResourceService {
     ResourceDTO add(ResourceDTO resourceDTO);
 
     ResourceDTO update(ResourceDTO resourceDetails);
+
+    List<ResourceDTO> getResourcesByRole(String roleName);
 }

@@ -85,4 +85,10 @@ public class ResourceServiceImpl implements ResourceService {
         resource.setCreationDetails(jwtUtil.extractUsernameFromRequest());
         return resourceMapper.ResourceToResourceDTO(resourceRepository.save(resource));
     }
+
+    @Override
+    public List<ResourceDTO> getResourcesByRole(String roleName) {
+        List<Resource> resourcesByRoleName = resourceRepository.findByRoleName(roleName);
+        return resourceMapper.ResourcesToResourceDTOs(resourcesByRoleName);
+    }
 }

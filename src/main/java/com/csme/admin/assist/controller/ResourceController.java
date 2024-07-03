@@ -63,6 +63,12 @@ public class ResourceController {
 
     }
 
+    @GetMapping("/roles/{roleName}")
+    public ResponseEntity<List<ResourceDTO>> getResourcesByRole(@PathVariable(name = "roleName") String roleName){
+        List<ResourceDTO> resourcesByRole = resourceService.getResourcesByRole(roleName);
+        return ResponseEntity.ok(resourcesByRole);
+    }
+
     //TO ADD A RESOURCE FOR ADMIN USERS
     @PostMapping()
    // @Secured({"ADMIN","MANAGER"})

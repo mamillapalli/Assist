@@ -20,7 +20,9 @@ create table if not exists admin.resource_table
     joining_date timestamp,
     last_name varchar(255),
     reporting_to varchar(255),
-    active_status boolean
+    active_status boolean,
+    contact_number varchar(255),
+    contact_address varchar(500)
 );
 
 alter table admin.resource_table owner to postgres;

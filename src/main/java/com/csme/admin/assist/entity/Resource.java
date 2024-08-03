@@ -42,5 +42,9 @@ public class Resource extends Base{
     @Column(name = "REPORTING_TO")
     private String reportingTo;
 
+    @Column(name = "CONTACT_NUMBER")
+    private String contactNumber;
+    @Column(name = "CONTACT_ADDRESS")
+    private String contactAddress;
 
 }

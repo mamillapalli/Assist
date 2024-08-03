@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
@@ -35,4 +37,11 @@ public class ResourceDTO {
     private String emailAddress;
     private List<RoleDTO> roles;
     private String reportingTo;
+    
+    @NotBlank(message = "Phone number should not be blank")
+    @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Invalid phone number")
+   // @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number")
+    private String contactNumber;
+    @NotBlank(message = "Address should not be blank")
+    private String contactAddress;
 }

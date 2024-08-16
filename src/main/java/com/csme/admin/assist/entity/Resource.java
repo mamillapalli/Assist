@@ -46,5 +46,8 @@ public class Resource extends Base{
     private String contactNumber;
     @Column(name = "CONTACT_ADDRESS")
     private String contactAddress;
+    
+    @Column(name = "PASSCODE")
+    private String passCode;
 
 }

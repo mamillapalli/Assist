@@ -33,7 +33,8 @@ public class AssistUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "12345";
+        //return "12345";
+    	return resource.getPassCode();
     }
 
     @Override

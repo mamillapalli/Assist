@@ -43,44 +43,44 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${cors.allowedURLS}")
     private String corsAllowedUrls;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-      //  auth.userDetailsService(myUserDetailsService);
-//        auth.ldapAuthentication().userDnPatterns("uid={0},ou=people")
-//                .groupSearchBase("ou=groups")
-//                .contextSource()
-//                .url("ldap://localhost:8389/dc=springframework,dc=org")
-//                .and()
-//                .passwordCompare()
-//               // .passwordEncoder(new BCryptPasswordEncoder())
-//               // .passwordEncoder(new )
-//                .passwordAttribute("userPassword");
-        System.out.println("ldap url is " + ldapUrl);
-        System.out.println("ldap manager Dn is " + ldapManagerDn);
-        System.out.println("ldap manager password is " + ldapManagerPassword);
-        System.out.println("corsAllowedUrls is " + corsAllowedUrls);
-
-            auth.ldapAuthentication()
-
-                    // .userDnPatterns("CN={0},OU=Office365")
-                    //  .groupSearchBase("OU=groups")
-                    .userSearchBase("OU=Office365")
-                   // .userSearchFilter("CN={0}").
-                     .userSearchFilter("(userPrincipalName={0})")
-
-
-                    .contextSource()
-                    //.url("ldap://chinasystems-me.com/DC=chinasystems-me,DC=com");
-
-                    .url(ldapUrl).managerDn(ldapManagerDn).managerPassword(ldapManagerPassword);
-            // .and()
-            // .passwordCompare()
-            // .passwordEncoder(new BCryptPasswordEncoder())
-            // .passwordEncoder(new )
-            // .passwordAttribute("userPassword");
-
-        System.out.println("authenticated without exception");
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//      //  auth.userDetailsService(myUserDetailsService);
+////        auth.ldapAuthentication().userDnPatterns("uid={0},ou=people")
+////                .groupSearchBase("ou=groups")
+////                .contextSource()
+////                .url("ldap://localhost:8389/dc=springframework,dc=org")
+////                .and()
+////                .passwordCompare()
+////               // .passwordEncoder(new BCryptPasswordEncoder())
+////               // .passwordEncoder(new )
+////                .passwordAttribute("userPassword");
+//        System.out.println("ldap url is " + ldapUrl);
+//        System.out.println("ldap manager Dn is " + ldapManagerDn);
+//        System.out.println("ldap manager password is " + ldapManagerPassword);
+//        System.out.println("corsAllowedUrls is " + corsAllowedUrls);
+//
+//            auth.ldapAuthentication()
+//
+//                    // .userDnPatterns("CN={0},OU=Office365")
+//                    //  .groupSearchBase("OU=groups")
+//                    .userSearchBase("OU=Office365")
+//                   // .userSearchFilter("CN={0}").
+//                     .userSearchFilter("(userPrincipalName={0})")
+//
+//
+//                    .contextSource()
+//                    //.url("ldap://chinasystems-me.com/DC=chinasystems-me,DC=com");
+//
+//                    .url(ldapUrl).managerDn(ldapManagerDn).managerPassword(ldapManagerPassword);
+//            // .and()
+//            // .passwordCompare()
+//            // .passwordEncoder(new BCryptPasswordEncoder())
+//            // .passwordEncoder(new )
+//            // .passwordAttribute("userPassword");
+//
+//        System.out.println("authenticated without exception");
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

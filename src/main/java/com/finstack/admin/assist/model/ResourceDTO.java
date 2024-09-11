@@ -1,6 +1,7 @@
 package com.finstack.admin.assist.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.finstack.admin.assist.entity.FrequencyEnum;
 import com.finstack.admin.assist.entity.Role;
 
 import lombok.*;
@@ -45,4 +46,8 @@ public class ResourceDTO {
     private String contactNumber;
     @NotBlank(message = "Address should not be blank")
     private String contactAddress;
+    
+    private FrequencyEnum leaveFrequency;
+    
+    private FrequencyEnum workFrequency;
 }

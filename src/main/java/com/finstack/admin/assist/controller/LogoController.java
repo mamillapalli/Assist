@@ -29,8 +29,7 @@ public class LogoController {
 	            // Handle cases where the logo URL is not found or invalid
 	            if ("Logo not found".equals(logoUrl) || "Error retrieving logo URL".equals(logoUrl) || logoUrl == null) {
 	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Logo not found or error retrieving URL");
-	            }
-
+	            }	            
 	            // Return the logo URL
 	            return ResponseEntity.ok().body(logoUrl);
 	        } catch (Exception ex) {

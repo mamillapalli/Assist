@@ -3,6 +3,8 @@ package com.finstack.admin.assist.entity;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
+
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -49,5 +51,8 @@ public class Resource extends Base{
     
     @Column(name = "PASSCODE")
     private String passCode;
-
+    @Column(name = "LEAVE_FREQUENCY")
+    private FrequencyEnum leaveFrequency;
+    @Column(name = "WORK_FREQUENCY")
+    private FrequencyEnum workFrequency;
 }

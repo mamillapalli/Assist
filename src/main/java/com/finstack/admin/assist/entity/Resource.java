@@ -3,6 +3,8 @@ package com.finstack.admin.assist.entity;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
+
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;

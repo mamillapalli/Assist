@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<PageInfo>
+		<image>https://i.ibb.co/5jqDQ4k/finstack-logo.png</image>
+		<title>finstack logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/z2NX6jD/worklog.png</image>
+		<title>worklog logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/h9GR92T/Roless.png</image>
+		<title>roles logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/qmxM7nZ/leave.png</image>
+		<title>leave logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/Y8CWjdk/holidays.png</image>
+		<title>holidays logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/vHBJj1P/human-resource.png</image>
+		<title>resource logo</title>
+	</PageInfo>
+	<PageInfo>
+		<image>https://i.ibb.co/Px2ZVMw/project.png</image>
+		<title>project logo</title>
+	</PageInfo>
+	<!-- Other configurations -->
+</root>

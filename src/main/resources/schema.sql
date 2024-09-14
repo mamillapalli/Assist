@@ -23,7 +23,9 @@ create table if not exists admin.resource_table
     active_status boolean,
     contact_number varchar(255),
     contact_address varchar(500),
-    passcode varchar(255)
+    passcode varchar(255),
+    work_frequency varchar(255),
+    leave_frequency varchar(255)
 );
 
 alter table admin.resource_table owner to postgres;

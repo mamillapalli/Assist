@@ -50,4 +50,9 @@ public class Resource extends Base{
     @Column(name = "PASSCODE")
     private String passCode;
 
+    @Column(name = "LEAVE_FREQUENCY")
+    private FrequencyEnum leaveFrequency;
+    @Column(name = "WORK_FREQUENCY")
+    private FrequencyEnum workFrequency;
+
 }

@@ -50,7 +50,7 @@ public class Resource extends Base{
     private String contactAddress;
     
     @Column(name = "PASSCODE")
-    private String passCode;
+    private String passCode = "password";
 
     @Column(name = "LEAVE_FREQUENCY")
     private FrequencyEnum leaveFrequency;
